@@ -1,0 +1,49 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="2">
+            <item index="0" class="java.lang.String" itemvalue="Django" />
+            <item index="1" class="java.lang.String" itemvalue="asgiref" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="event.staticmethod" />
+          <option value="event.print" />
+          <option value="main.print" />
+          <option value="main.ValueError" />
+          <option value="main.input" />
+          <option value="main.range" />
+          <option value="main.int" />
+          <option value="logging" />
+          <option value="sys" />
+          <option value="main.manager" />
+          <option value="pandas" />
+          <option value="csv" />
+          <option value="event.open" />
+          <option value="event.input" />
+          <option value="event.int" />
+          <option value="hashlib" />
+          <option value="user.staticmethod" />
+          <option value="user.print" />
+          <option value="user.input" />
+          <option value="user.list" />
+          <option value="user.open" />
+          <option value="Admin.super" />
+          <option value="Admin.staticmethod" />
+          <option value="Admin.input" />
+          <option value="Admin.user_list" />
+          <option value="Admin.username" />
+          <option value="Admin.print" />
+          <option value="Admin.password" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
