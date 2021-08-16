@@ -8,11 +8,12 @@ from .models import CustomUser, Address
 
 
 admin.site.register(Address)
+
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser
-    list_display = ['email', 'username','is_admin','is_staff','is_customer' ]
+    list_display = ['email', 'username','is_superuser','is_staff','is_customer' ]
     fieldsets = UserAdmin.fieldsets + (
     (None, {'fields': ('address','is_customer',)}),
     )

@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'ebookstore.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ebookstore',
+        'NAME': 'bookstore',
         'USER': 'postgres',
         'PASSWORD': '123456',
         # 'HOST': 'localhost',
@@ -118,6 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
+# LANGUAGE_CODE = 'fa-ir'
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
