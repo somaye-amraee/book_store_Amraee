@@ -5,6 +5,34 @@ from accounts.models import CustomUser
 from products.models import Book
 from django.contrib.auth.models import User
 
+
+class Discount(models.Model):
+    """
+
+    a base model for our other discount models
+    """
+    DISCOUNT_CHOICES = [('C', 'مقداری'), ('P', 'درصدی')]
+    status = models.CharField(choices=DISCOUNT_CHOICES, default='C', max_length=5)
+    cash_discount = models.IntegerField(verbose_name='مقدار تخفیف نقدی', blank=True, null=True)
+    percent_discount = models.IntegerField(verbose_name='مقدار تخفیف درصدی', blank=True, null=True)
+    validate_date = models.DateTimeField(verbose_name='تاریخ اعمال کد تخفیف', )
+    expire_date = models.DateTimeField(verbose_name='تاریخ اعتبار کد تخفیف', )
+    active = models.BooleanField('وضعیت تخفیف', default=False)
+
+    class Meta:
+        abstract = True
+
+    def active_status(self):
+        if self.expire_date < timezone.now():
+            self.active = False
+            self.save()
+
+    def discount_apply(self):
+        if self.validate_date == timezone.now():
+            self.active = True
+            self.save()
+
+
 """discountCode model which is both percent based and cash based"""
 #  روی سبد خرید اعمال می شود
 class BasketDiscount(models.Model):
@@ -83,23 +111,46 @@ class Order(models.Model):
     total_price=models.IntegerField(verbose_name='قیمت کل')
     total_discount = models.IntegerField(verbose_name='تخفیف کل')
 
+    def __str__(self):
+        return self.customer.last_name
+
+    def placeOrder(self):
+        self.save()
+
+    @staticmethod
+    def get_orders_by_customer(customer_id):
+        return Order.objects.filter(customer=customer_id).order_by('-date')
+
+
+class OrderDetail(models.Model):
+    class Meta:
+        verbose_name = 'ایتم سفارش'
+        verbose_name_plural = 'ایتم های سفارش'
+
+    # STATUS_CHOICE = [('R', 'ثبت'), ('G', 'سفارش')]
+    order = models.ForeignKey('Order', on_delete=models.CASCADE, verbose_name='سبد خرید')
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, verbose_name='محصول')
+    # price = models.IntegerField(verbose_name='قیمت محصول')
+    count = models.IntegerField(verbose_name='تعداد')
 
     def __str__(self):
-        return f'{self.id}'
+        return self.invoice.customer.last_name
 
-    class OrderDetail(models.Model):
-        class Meta:
-            verbose_name = 'ایتم سفارش'
-            verbose_name_plural = 'ایتم های سفارش'
 
-        # STATUS_CHOICE = [('R', 'ثبت'), ('G', 'سفارش')]
-        order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='سبد خرید')
-        book = models.ForeignKey(Book, on_delete=models.CASCADE, verbose_name='محصول')
-        # price = models.IntegerField(verbose_name='قیمت محصول')
-        count = models.IntegerField(verbose_name='تعداد')
+    def get_total_item_price(self):
+        total = self.book.price * self.quantity
+        return total
 
-        def __str__(self):
-            return f'{self.id}'
+    def get_total_discount_item_price(self):
+        return self.quantity * self.book.discount_price
+
+    def get_amount_saved(self):
+        return self.get_total_item_price() - self.get_total_discount_item_price()
+
+    def get_final_price(self):
+        if self.book.discount_price:
+            return self.get_total_discount_item_price()
+        return self.get_total_item_price()
 
     #
     # # total purchaces without discount
@@ -116,15 +167,6 @@ class Order(models.Model):
     #             return (self.discount_code.percent / 100) * self.total_price
     #         else:
     #             return 0
-
-
-
-
-
-    # def __str__(self):
-    #     return self.owner.get_full_name()
-
-
 
 
 
@@ -150,19 +192,7 @@ class Order(models.Model):
 
 
 
-# class Order(models.Model):
-#     customer = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING, related_name='orders')
-#     invoice_date = models.DateTimeField()
-#     billing_address = models.CharField(max_length=70, blank=True, null=True)
-#     billing_city = models.CharField(max_length=40, blank=True, null=True)
-#     billing_state = models.CharField(max_length=40, blank=True, null=True)
-#     billing_country = models.CharField(max_length=40, blank=True, null=True)
-#     billing_postal_code = models.CharField(max_length=10, blank=True, null=True)
-#     total = models.BigIntegerField()
 
 
-# class OrderDetail(models.Model):
-#     order = models.ForeignKey(Order, on_delete=models.PROTECT)
-#     book = models.ForeignKey('products.Book', on_delete=models.DO_NOTHING)
-#     unit_price = models.IntegerField()
-#     quantity = models.IntegerField()
+
+

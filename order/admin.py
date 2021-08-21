@@ -7,3 +7,8 @@ admin.site.register(Order)
 admin.site.register(OrderDetail)
 admin.site.register(BasketDiscount)
 admin.site.register(ProductDiscount)
+
+
+@admin.register(Order)
+class InvoiceAdmin(admin.ModelAdmin):
+    list_display = ['id','order_date','complete']
