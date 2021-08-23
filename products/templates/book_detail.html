@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="container">
+            <div class="row " >
+                <div class="col-sm-6 ">
+
+                    <img src="{{ book.image.url }}" alt="{{ book.title }} " width="645px "
+                         style="border-top-right-radius:100px; ">
+                </div>
+                <div class="col-sm-6  ">
+                    <h2>{{ books_obj.title }}</h2>
+                    <p>{{books_obj.author }}</p>
+                    <p>{{books_obj.description }}</p>
+                    <p>{{ books_obj.category }}</p>
+                    <p>{{ books_obj.price}}</p>
+
+                </div>
+
+              </div>
+        </div>
+{% endblock content %}

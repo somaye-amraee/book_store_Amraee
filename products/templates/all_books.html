@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            {% for book in books_all %}
+                <div class="col-md-6">
+                    {% include 'books/component/book_item.html' with book=book%}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

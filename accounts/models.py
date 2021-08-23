@@ -38,8 +38,40 @@ class CustomUser(AbstractUser):
     last_login = models.DateTimeField(verbose_name='آخرین ورود', null=True, blank=True)
 
 
+    # def __str__(self):
+    #     return f'{self.first_name} {self.last_name}'
+
+    def register(self):
+        self.save()
+
+    @staticmethod
+    def get_customer_by_email(email):
+        try:
+            return CustomUser.objects.get(email=email)
+        except:
+            return False
+
+    def isExists(self):
+        if CustomUser.objects.filter(email=self.email):
+            return True
+
+        return False
+
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+
+class CustomerProxy(CustomUser):
+    class Meta:
+        proxy = True
+
+class StaffProxy(CustomUser):
+    class Meta:
+        proxy = True
+        # permissions=['']
+
+class AdminProxy(CustomUser):
+    class Meta:
+        proxy = True
 
     # Create your models here.
 

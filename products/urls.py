@@ -1,7 +1,10 @@
-from allauth.account.views import logout, Login
-from django.urls import path
 
-from products.views import BookListView
+from django.urls import path
+from .views import *
+from accounts.views import logout,Login, Signup
+from order.views import Cart, CheckOut,Index,store,OrderView
+
+from middlewares.auth import  auth_middleware
 
 urlpatterns = [
     # pages

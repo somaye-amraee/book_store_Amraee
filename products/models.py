@@ -16,7 +16,7 @@ class BookManager(models.Manager):
 class Category(models.Model):
     category = models.CharField(max_length=200)
     class Meta:
-        verbose_name = 'دسته بندی'
+        # verbose_name = 'دسته بندی'
         verbose_name_plural = 'دسته بندی ها'
 
     name = models.CharField(verbose_name='دسته بندی ها', max_length=200, default='')
@@ -46,13 +46,13 @@ class Book(models.Model):
     class Meta:
         verbose_name = 'کتاب'
         verbose_name_plural = 'کتاب ها'
-        ordering = ('created',)
+        # ordering = ('created',)
 
     title = models.CharField(verbose_name='عنوان', max_length=200)
     description = models.CharField('توضیحات', max_length=500)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     created_at = models.DateTimeField('تاریخ ثبت', auto_now_add=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey('Category', on_delete=models.CASCADE)
     inventory = models.PositiveIntegerField('انبار', default=0)
     price = models.PositiveIntegerField('قیمت', default=0)
     image = models.ImageField(upload_to='book_pic/', default='./images/default_pic.png')

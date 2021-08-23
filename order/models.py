@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timezone
@@ -109,7 +111,9 @@ class Order(models.Model):
     # discount_cost = models.ForeignKey( ,verbose_name='تخفیف نقدی')
     order_date = models.DateTimeField(verbose_name='زمان ایجاد سفارش', auto_now_add= True )
     total_price=models.IntegerField(verbose_name='قیمت کل')
+    complete = models.BooleanField(default=False, verbose_name='تکمیل خرید')
     total_discount = models.IntegerField(verbose_name='تخفیف کل')
+
 
     def __str__(self):
         return self.customer.last_name
@@ -134,7 +138,7 @@ class OrderDetail(models.Model):
     count = models.IntegerField(verbose_name='تعداد')
 
     def __str__(self):
-        return self.invoice.customer.last_name
+        return self.order.customer.last_name
 
 
     def get_total_item_price(self):
