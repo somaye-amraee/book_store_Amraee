@@ -48,17 +48,23 @@ class Book(models.Model):
         verbose_name_plural = 'کتاب ها'
         # ordering = ('created',)
 
+    DISCOUNT_TYPE = [('P', 'Percentage'), ('C', 'Cash'), ('N', 'No Discount')]
     title = models.CharField(verbose_name='عنوان', max_length=200)
     description = models.CharField('توضیحات', max_length=500)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     created_at = models.DateTimeField('تاریخ ثبت', auto_now_add=True)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
     inventory = models.PositiveIntegerField('انبار', default=0)
-    price = models.PositiveIntegerField('قیمت', default=0)
-    image = models.ImageField(upload_to='book_pic/', default='./images/default_pic.png')
+    image = models.ImageField(upload_to='book_pic/', default='static/images/default_pic.png')
     document_addr = models.FileField(upload_to='documents/', blank=True, null=True)
     active = models.BooleanField(default=False, verbose_name='فعال / غیرفعال')
     slug = AutoSlugField(max_length=200, allow_unicode=True, populate_from=['title', 'author', 'id'], unique=True)
+    unit_price = models.PositiveIntegerField(default=0)
+    discount_type = models.CharField('نوع تخفیف', choices=DISCOUNT_TYPE, null=True, blank=True, max_length=5,
+                                     default='N')
+    cash_discount = models.IntegerField(verbose_name='مقدار تخفیف نقدی', default=0)
+    percent_discount = models.IntegerField(verbose_name='مقدار تخفیف درصدی', default=0)
+    price = models.PositiveIntegerField('قیمت')
 
 
     def __str__(self):
@@ -84,5 +90,19 @@ class Book(models.Model):
 
     def get_absolute_url(self):
         return reverse('book_detail', args=[str(self.slug)])
+
+    @property
+    def price(self):
+        if self.discount_type == 'N':
+            return self.unit_price
+
+        elif self.discount_type == 'C':
+
+            return self.unit_price-self.cash_discount
+
+        elif self.discount_type == 'P':
+            total = (self.percent_discount * self.unit_price) / 100
+            return int(self.unit_price - total)
+        return self.price
 
 

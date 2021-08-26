@@ -106,9 +106,6 @@ class Order(models.Model):
     customer = models.ForeignKey(CustomUser,verbose_name='مشتری',related_name='orders', on_delete=models.CASCADE, )
     # discount = models.ForeignKey(CashDiscount, verbose_name='تخفیف نقدی', blank=True, null=True)
     discount_code = models.ForeignKey(BasketDiscount,on_delete=models.CASCADE,verbose_name= 'تخفیف کدی', max_length=100, blank=True, null=True)
-    # is_paid = models.BooleanField(verbose_name='پرداخت شده / نشده')
-    # count = models.IntegerField(verbose_name='تعداد', default=1)
-    # discount_cost = models.ForeignKey( ,verbose_name='تخفیف نقدی')
     order_date = models.DateTimeField(verbose_name='زمان ایجاد سفارش', auto_now_add= True )
     total_price=models.IntegerField(verbose_name='قیمت کل')
     complete = models.BooleanField(default=False, verbose_name='تکمیل خرید')
@@ -123,7 +120,7 @@ class Order(models.Model):
 
     @staticmethod
     def get_orders_by_customer(customer_id):
-        return Order.objects.filter(customer=customer_id).order_by('-date')
+        return Order.objects.filter(customer=customer_id).order_by('-order_date')
 
 
 class OrderDetail(models.Model):
@@ -156,41 +153,7 @@ class OrderDetail(models.Model):
             return self.get_total_discount_item_price()
         return self.get_total_item_price()
 
-    #
-    # # total purchaces without discount
-    # @property
-    # def total_price(self):
-    #     return sum(item.get_cost for item in self..all())
-    #
-    # @property
-    # def total_discount(self):
-    #     if self.discount_code.active and self.discount_code.status=='V':
-    #         if self.discount_cost.max_purchase <=self.total_price:
-    #             return self.discount_cost.cost - ((self.discount_code.percent / 100)* self.total_price)
-    #         elif self.discount_code.active:
-    #             return (self.discount_code.percent / 100) * self.total_price
-    #         else:
-    #             return 0
 
-
-
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(args, kwargs)
-    #     self.orders = None
-    #
-    # def __str__(self):
-    #     return self.book.title
-    #
-    # def final_order_price(self):
-    #     orders_price = sum(self.orders.final_order_price())
-    #     if self.discount:
-    #         if self.discount.type =='Cash':
-    #             return orders_price-self.discount.CashDiscount
-    #         elif self.discount.type == 'PercentDiscount':
-    #             return orders_price * (100- self.discount.p)/100
-    #
-    #     else:
-    #         return orders_price
 
 
 

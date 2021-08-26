@@ -19,7 +19,8 @@ class BookListView(ListView):
     model = Book
     template_name = 'all_books.html'
     queryset = Book.objects.order_by('-created_at')
-    context_object_name = 'books_all'
+    # context_object_name = 'books_all'
+    context_object_name = 'products'
 
 
 class BookDetailView(DetailView):

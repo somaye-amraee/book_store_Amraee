@@ -18,7 +18,7 @@
 
    <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Book Store</a>
+    <a class="navbar-brand" href="#">فروشگاه آنلاین کتاب</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -28,30 +28,28 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'homepage' %}">خانه</a>
         </li>
-{#          <li class="nav-item">#}
-{#          <a class="nav-link active" aria-current="page" href="{% url 'cart' %}">سبد خرید</a>#}
-{#            </li>#}
+
       <li class="nav-item active">
           <a class="nav-link" href="{% url 'cart' %}">سبد خرید
             <span class="badge badge-success">{{request.session.cart.keys|length}}</span>
-            <span class="sr-only">(current)</span></a>
+            <span class="sr-only"></span></a>
         </li>
 
         {% if request.session.customer %}
 
         <li class="nav-item active ">
-          <a class="nav-link"  href="{% url 'orders' %}">سغارش<span class="sr-only">(current)</span></a>
+          <a class="nav-link"  href="{% url 'orders' %}">سغارش<span class="sr-only"></span></a>
         </li>
         <li class="nav-item active ">
-          <a class="nav-link"  href="{% url 'logout' %}">خروج<span class="sr-only">(current)</span></a>
+          <a class="nav-link"  href="{% url 'logout' %}">خروج<span class="sr-only"></span></a>
         </li>
         {% else %}
 
         <li class="nav-item active">
-          <a class="nav-link"  href="{% url 'signup' %}">ثبت نام<span class="sr-only">(current)</span></a>
+          <a class="nav-link"  href="{% url 'signup' %}">ثبت نام<span class="sr-only"></span></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link"  href="{% url 'login' %}">ورود<span class="sr-only">(current)</span></a>
+          <a class="nav-link"  href="{% url 'login' %}">ورود<span class="sr-only"></span></a>
         </li>
         {% endif %}
 

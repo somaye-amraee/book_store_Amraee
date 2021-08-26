@@ -7,9 +7,9 @@ from .models import Book,Category,Author
 class AdminBook(admin.ModelAdmin):
     list_display = [
 
-        'id','title','slug','inventory','price','active'
+        'id','title','slug','inventory','unit_price','active'
     ]
-    list_editable = ['active','price','inventory']
+    list_editable = ['active','unit_price','inventory']
 
 
 @admin.register(Category)

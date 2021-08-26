@@ -7,7 +7,7 @@ from django.views import View
 from products.models import Book,Category
 from .models import Order
 
-
+ #
 class Cart(View):
     def get(self , request):
         ids = list(request.session.get('cart').keys())
@@ -33,10 +33,12 @@ class CheckOut(View):
                               address=address,
                               quantity=cart.get(str(product.id)))
             order.save()
+            # بعد از دادن آدرس و نهایی شدن خرید. کارت خالی می شود
         request.session['cart'] = {}
 
         return redirect('cart')
 
+# برای اپدیت کردن تعداد محصولات
 class Index(View):
 
     def post(self, request):
@@ -68,6 +70,7 @@ class Index(View):
         # print()
         return HttpResponseRedirect(f'/store{request.get_full_path()[1:]}')
 
+# دسته بندی ها رو میگیره یعنی مثلا براساس دسته رمان کتاب ها رو نشون میده
 def store(request):
     cart = request.session.get('cart')
     if not cart:
@@ -87,9 +90,8 @@ def store(request):
     print('you are : ', request.session.get('email'))
     return render(request, 'index.html', data)
 
-
+#   در   orderبرای نمایش اوردهایی که ثبت شده اند
 class OrderView(View):
-
 
     def get(self , request ):
         customer = request.session.get('customer')
