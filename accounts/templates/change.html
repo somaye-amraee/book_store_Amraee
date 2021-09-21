@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h1>تغییر پسورد </h1>
+
+    <form action="" method="post" >
+        {% csrf_token %}
+        {{ form.as_p }}
+
+    <button type="submit">change</button>
+    </form>
+    <style>
+    form ul{
+        display:none;
+    }
+    </style>
+
+{% endblock %}

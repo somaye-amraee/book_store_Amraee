@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<table class="table table-bordered">
+
+  <thead>
+
+    <tr>
+
+      <th scope="col">#</th>
+      <th scope="col">دسته ها</th>
+      <th scope="col"></th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+   {% for c in category %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{ c.name }}</td>
+
+
+        <td>
+        <a href="{% url 'category_delete' c.pk %}"> حذف</a>
+
+    </td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+
+
+
+
+
+{% endblock content %}

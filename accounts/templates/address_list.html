@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<table class="table table-bordered">
+
+  <thead>
+
+    <tr>
+
+      <th scope="col">#</th>
+
+      <th scope="col">ادرس</th>
+      <th scope="col">ادیت</th>
+      <th scope="col">جزییات</th>
+      <th scope="col">remove</th>
+
+
+    </tr>
+  </thead>
+
+  <tbody>
+
+{% for addree in address %}
+
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>
+         address :{{ addree.country}},
+          {{ addree.state }} ,{{addree.city }} {{ addree.street }} ,{{ addree.street_2 }}
+          {{ addree.postal_code }}
+          {{ addree }}
+        </td>
+      <td>  <a href="{% url 'address_edit' addree.pk %}"> edit</a></td>
+      <td> <td>
+           <a href=" {{ addree.get_absolute_url }}" >جزییات</a>
+      </td></td>
+      <td> <a href="{% url 'address_delete' addree.pk %}"> remove</a> </td>
+
+    </tr>
+{% endfor %}
+
+  </tbody>
+</table>
+
+
+
+{% endblock content %}

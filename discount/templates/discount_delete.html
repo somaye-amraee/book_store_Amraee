@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="card">
+  <h5 class="card-header">حذف discount</h5>
+  <div class="card-body">
+    <form action="" method="post">{% csrf_token %}
+<p>ایا از حذف اطمینان دارید"{{object.code_discount }}"?</p>
+<input type="submit" value="Confirm" class="btn btn-anger">
+</form>
+  </div>
+</div>
+{% endblock content %}

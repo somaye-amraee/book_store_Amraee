@@ -1,0 +1,122 @@
+<!doctype html>
+{% load static %}
+<html lang="ar" dir="rtl">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css"
+          integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  </head>
+  <body>
+
+
+   <nav class="navbar navbar-expand-lg navbar-green bg-success ">
+<!--   <nav class="navbar navbar-expand-lg navbar-light bg-light ">-->
+<!--   <nav class="navbar navbar-expand-lg navbar-light bg-light">-->
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">به فروشگاه کتاب آندیا خوش آمدید</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">خانه</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'listbook' %}">همه</a>
+            </li>
+
+        <li class="nav-item active ">
+          <a class="nav-link" href="{% url 'cart_detail' %}" >سبد خرید<span class="sr-only"></span></a>
+        </li>
+       {% if user.is_authenticated %}
+
+         <li class="nav-item active ">
+          <a class="nav-link"  href="{% url 'history' %}">تاریخچه سفارش<span class="sr-only"></span></a>
+        </li>
+           <li class="nav-item active ">
+          <a class="nav-link"  href="{% url 'profile' %}">پروفایل<span class="sr-only"></span></a>
+        </li>
+
+           <li class="nav-item active ">
+          <a class="nav-link"  href="{% url 'logout' %}">خروج<span class="sr-only"></span></a>
+        </li>
+
+
+        {% else %}
+
+
+        <li class="nav-item active">
+          <a class="nav-link"  href="{% url 'login' %}">ورود<span class="sr-only"></span></a>
+        </li>
+           <li class="nav-item active">
+          <a class="nav-link"  href="{% url 'user_register' %}">ثبت نام<span class="sr-only"></span></a>
+        </li>
+
+        {% endif %}
+
+
+     {% if user.is_authenticated and user.is_staff %}
+
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+         پنل کارمندان
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{% url 'book_new' %}">ثبت کتاب</a>
+          <a class="dropdown-item" href="{% url 'booklistadmin' %}">لیست همه کتاب ها</a>
+          <a class="dropdown-item" href="{% url 'author_new' %}">اضافه کردن نویسنده</a>
+          <a class="dropdown-item" href="{% url 'author_listadmin' %} ">لیست نویسنده</a>
+          <a class="dropdown-item" href="{% url 'list_category' %} ">لیست دسته ها</a>
+          <a class="dropdown-item" href="{% url 'category_new' %}">اضافه کردن دسته</a>
+            <a class="dropdown-item" href="{% url 'discount_new' %}">اضافه کردن تخفیف</a>
+          <a class="dropdown-item" href="{% url 'discount_view_list' %}">لیست تخفیف</a>
+
+        </div>
+      </li>
+
+
+             {% endif %}
+
+
+      </ul>
+
+
+      <form class="d-flex" action="{% url 'book_title' %}">
+        <input class="form-control me-2" type="search" placeholder="نام کتاب/ نام نویسنده" aria-label="Search"
+               name="query" id="query">
+        <button class="btn btn-outline-success" type="submit">جستجو</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+{% include 'message.html' %}
+
+   {% block content %}
+
+  {% endblock %}
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+
+    </script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+ <script type="text/javascript" src="{% static 'js/cart.js' %}"> </script>
+  </body>
+</html>

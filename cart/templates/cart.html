@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="container">
+    <div class="row">
+
+    <div class="container">
+
+
+    <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col"></th>
+      <th scope="col">محصول</th>
+      <th scope="col">تعداد</th>
+      <th scope="col">قیمت</th>
+      <th scope="col">قیمت کل</th>
+      <th scope="col"></th>
+
+    </tr>
+  </thead>
+  <tbody>
+
+  {% for c in cart %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td><img src="{{ c.product.image.url }}" style="width: 100px" alt="{{ c.product.title }}"></td>
+      <td>{{ c.product.title }}</td>
+        <td>
+        <a href="{% url 'add_single' c.id %}" > <i class="fa fa-plus">+</i></a>
+        {{ c.quantity }}
+        <a href="{% url 'remove_single' c.id %}"> <i class="fa fa-minus">-</i> </a>
+        </td>
+        <td>{{ c.product.total_price }}</td>
+
+        <td>
+        {% widthratio c.product.total_price 1 c.quantity %}
+        </td>
+    <td>
+        <a href="{% url 'remove_cart' c.id  %}"> remove</a>
+    </td>
+
+
+    </tr>
+{% endfor %}
+  <td aria-colspan="7">قیمت کل سبد</td>
+  <td>{{ total }}</td>
+
+
+
+  </tbody>
+
+</table>
+
+
+    </div>
+
+
+    </div>
+
+
+
+    <div class="row">
+        <form action="{% url 'order_create' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-outline-success " >
+ثبت
+            </button>
+        </form>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

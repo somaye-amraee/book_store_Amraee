@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="container">
+            <div class="row " >
+                <div class="col-sm-6 ">
+
+                    <img src="{{ product.image.url }}" alt="{{ product.title }} " width="300px "
+                         style="border-top-right-radius:100px; ">
+                </div>
+                <div class="col-sm-6  ">
+                    <h2>{{ product.title }} </h2>
+                    <p> نویسنده:{{product.author }}</p>
+                    <p>توضیحات :{{product.description }} </p>
+                    <p>دسته بندی :{{ product.category }} </p>
+                    <p>قیمت:{{ product.unit_price}} </p>
+                    <p>قیمت کل :{{ product.total_price}} </p>
+
+                </div>
+
+              </div>
+        </div>
+
+
+
+
+
+{#    card add form#}
+    <div class="card">
+    <form method="post"  action=" {% url 'add_cart' product.id %}">
+        {% csrf_token %}
+
+        <label>
+            <input type="number" name="quantity" min="1" value="1" max="{{ product.inventory }}">
+        </label>
+        <button type="submit"> اضافه به سبد خرید</button>
+    </form>
+    </div>
+
+{% if user.is_staff %}
+<!--<a href="{% url 'book_edit' product.pk %}" class="btn btn-success"> ویرایش  </a>-->
+<!--    <p><a href="{% url 'book_delete' product.pk %}" class="btn btn-danger" > حذف </a></p>-->
+
+
+<button type="button" class="btn btn-primary btn-lg"><a href="{% url 'book_edit' product.pk %}"> ویرایش  </a></button>
+<button type="button" class="btn btn-secondary btn-lg"><a href="{% url 'book_delete' product.pk %}" > حذف </a></button>
+
+{% endif %}
+
+
+
+
+{% endblock content %}

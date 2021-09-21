@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<table class="table table-bordered">
+
+  <thead>
+
+    <tr>
+
+      <th scope="col">#</th>
+
+      <th scope="col">مشتری</th>
+      <th scope="col">تعداد</th>
+      <th scope="col">زمان سفارش</th>
+      <th scope="col">قیمت کل</th>
+      <th scope="col">وضعیت سفارش</th>
+      <th scope="col">ادرس</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+   {% for order in orders %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>
+        {{ order.customer.username }}</td>
+      <td>{{ order.quantity}}</td>
+      <td>{{ order.create_date }}</td>
+      <td>{{ order.get_price }}</td>
+      <td>{{ order.paid }}</td>
+      <td>{{ order.address }}</td>
+
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+
+
+
+{% endblock content %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col"></th>
+      <th scope="col">عنوان</th>
+      <th scope="col">تاریخ فعال سازس</th>
+      <th scope="col">تاریخ منقضی</th>
+      <th scope="col">وضعیت</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for discount in discounts %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+       <td></td>
+      <td>{{discount.discount_code }}</td>
+      <td>{{ discount.validate_date }}</td>
+        <td>{{ discount.expire_date }}</td>
+        <td>{{ discount.active }}</td>
+      <td>
+           <a href=" {{ discount.get_absolute_url }}" >جزییات</a>
+      </td>
+
+
+          <td>
+        <a href="{% url 'discount_edit' discount.pk %}"> ویرایش</a>
+
+    </td>
+
+
+        <td>
+        <a href="{% url 'discount_delete' discount.pk %}"> حذف</a>
+
+    </td>
+
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<table class="table table-bordered">
+
+  <thead>
+
+    <tr>
+
+      <th scope="col">#</th>
+      <th scope="col">نام و نام خانوادگی</th>
+      <th scope="col"></th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+   {% for author in authors %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{ author.full_name }}</td>
+
+
+        <td>
+        <a href="{% url 'author_delete' author.pk %}"> حدف</a>
+
+    </td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}profile {% endblock %}
+{% block body %}
+    <h1>profile</h1>
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+
+        <h6 class="card-subtitle mb-2 text-muted">user :{{ profile.user.username }}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">name:{{ profile.user.first_name }}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">last_name :{{ profile.user.last_name }}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">email :{{ profile.user.email }}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">phone :{{ profile.phone }}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">address :{{ profile.address }}</h6>
+        <a href="{% url 'accounts:update' %} ">update</a>
+        <a href="{% url 'accounts:change' %} ">change</a>
+      </div>
+    </div>
+
+{% endblock %}
+

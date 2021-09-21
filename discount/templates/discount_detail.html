@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="card text-center">
+  <div class="card-header">
+   تخفیف سبد خرید
+  </div>
+  <div class="card-body">
+
+    <p class="card-text">
+         <h2>{{ discount. code_discount }} </h2>
+                    <h2>{{ discount. validate_date }} </h2>
+                    <h2>{{ discount. expire_date }} </h2>
+                    <h2>{{ discount. active }} </h2>
+                    <h2>{{ discount. percent_discount }} </h2>
+    </p>
+
+  </div>
+  <div class="card-footer text-muted">
+
+
+{% if user.is_staff %}
+<span>
+    <a href="{% url 'discount_edit' discount.pk %}" > Edit </a>
+</span>
+<span>
+     <p><a href="{% url 'discount_delete' discount.pk %}"  > Delete </a></p>
+</span>
+
+
+{% endif %}
+  </div>
+</div>
+{% endblock content %}

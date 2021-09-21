@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{#{% block title %}profile {% endblock %}#}
+{% block content %}
+    <h1>پروفایل کاربری</h1>
+    <br>
+    <br>
+<!--    <div class="card" style="width: 53rem;">-->
+        <div class="card m-auto" style="width: 53rem;">
+      <div class="card-body ">
+
+        <h6 class="card-subtitle mb-2 text-muted">user :{{ profile.user.username }}</h6>
+
+        <h6 class="card-subtitle mb-2 text-muted">اسم:{{ profile.user.first_name }}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">نام خانوادگی :{{ profile.user.last_name }}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">email :{{ profile.user.email }}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">company :{{ profile.company }}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">fax :{{ profile.fax}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">phone :{{ profile.phone }}</h6>
+
+
+
+          <a href="{% url 'update' profile.pk %}" class="btn btn-success"> ایمیل  </a>
+<!--            <a href="{% url 'add_address'%}" class="btn btn-warning"> add addresses </a>-->
+            <a href="{% url 'change'%}" class="btn btn-success"> تغییر پسورد </a>
+           <a href="{% url 'list_address' %}" class="btn btn-success"> مدیریت آدرس </a>
+            <a href="{% url 'address_new'%}" class="btn btn-success"> اضافه کردن آدرس </a>
+
+      </div>
+    </div>
+    <div class="card" style="width: 53rem;">
+      <div class="card-body">
+
+
+
+<!--            <a href="{% url 'add_address'%}" class="btn btn-warning"> add addresses </a>-->
+
+<!--            <a href="{% url 'change'%}" class="btn btn-warning"> delete address </a>-->
+
+      </div>
+    </div>
+
+{% endblock %}
+

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+
+    <div class="row">
+
+		<div class="col-sm-3 ">
+			<div class="list-group">
+
+			<a href="/" class="list-group-item list-group-item-action btn btn-outline-success">همه دسته بندی ها</a>
+
+				{% for category in categories %}
+				<a href="/?category={{category.id}}"
+				class="list-group-item list-group-item-action btn btn-outline-success ">{{category.name}}</a>
+				{% endfor %}
+			</div>
+		</div>
+
+
+
+
+<div class="container">
+
+    <div class="pb-3 h5">لیست کتاب ها</div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+
+        {% for product in products %}
+
+        <div class="col">
+            <div class="card shadow-sm">
+                <img class="img-fluid" alt="Responsive image" src="{{ product.image.url }}">
+                <div class="card-body">
+                    <p class="card-text">
+                        <a class="text-dark text-decoration-none" href="{{ product.get_absolute_url }}">
+                            {{ product.title }}</a>
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+
+</div>
+</div>
+         <footer class="container-floid justify-content-between align-items-center"    style="background-color: green;" >
+    <div class="row">
+
+
+
+      <div class="col-6 " dir="rtl">
+          <div class="row justify-content-start align-items-right p-4">
+            <div class="col-1"><i class="fab fa-instagram fa-2x p-2"></i></div>
+            <div class="col-1"> <i class="fab fa-telegram fa-2x p-2"></i></div>
+            <div class="col-1"><i class="fab fa-twitter fa-2x p-2"></i></div>
+            <div class="col-1"><i class="fab fa-youtube fa-2x p-2"></i></div>
+          </div>
+      </div>
+        <div class="col-6 py-md-4 p-4">
+        <span>copyright © 2021</span>
+      </div>
+
+
+    </div>
+
+  </footer>
+{% endblock content %}

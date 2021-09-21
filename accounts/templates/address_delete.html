@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Delete address </h1>
+<form action="" method="post">{% csrf_token %}
+<p>Are you sure you want to delete "{{object.country}} ,{{object.state}} ,{{ object.city}},{{object.street}},
+  {{object.street_2}} ,{{object.postal_code}}" ?</p>
+<input type="submit" value="Confirm">
+</form>
+{% endblock content %}

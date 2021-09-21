@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %} change password {% endblock title %}
+
+{% block body %}
+<h1>change password </h1>
+
+    <form action="" method="post" >
+        {% csrf_token %}
+        {{ form.as_p }}
+
+    <button type="submit">change</button>
+    </form>
+    <style>
+    form ul{
+        display:none;
+    }
+    </style>
+{% endblock %}
